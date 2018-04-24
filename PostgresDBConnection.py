@@ -5,7 +5,7 @@ class PostgresDBConnection(DBConnection):
 	def __init__(self, driver):
 		self.driver = driver
 		self.transaction_size = 1
-		self.commit_enabled = True
+		self._commit_enabled = True
 
 	def connect(self, connection_string):
 		if not connection_string:
@@ -17,7 +17,7 @@ class PostgresDBConnection(DBConnection):
 		return self
 
 	def close(self):
-		if self.is_open() and not self.commit_enabled:
+		if self.is_open() and not self.commit_enabled():
 			self.rollback()
 		self.psyconn.close()
 	
@@ -29,9 +29,12 @@ class PostgresDBConnection(DBConnection):
 
 	def rollback(self):
 		self.psyconn.rollback()
-	
+
+	def commit_enabled(self):
+		return self._commit_enabled
+
 	def commit(self):
-		if self.commit_enabled:
+		if self.commit_enabled():
 			self.psyconn.commit()
 
 	def cursor(self):
@@ -116,10 +119,10 @@ class PostgresDBConnection(DBConnection):
 		return self.transaction_size
 	
 	def enable_commit(self):
-		self.commit_enabled = True
+		self._commit_enabled = True
 
 	def disable_commit(self):
-		self.commit_enabled = False
+		self._commit_enabled = False
 
 	def _should_commit_batch(self, total_count, query_number):
 		transaction_size = self.get_transaction_size()

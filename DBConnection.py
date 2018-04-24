@@ -24,7 +24,7 @@ class DBConnection(object):
 		pass
 
 	@abc.abstractmethod
-	def update(self, query, commit):
+	def update(self, query):
 		pass
 
 	@abc.abstractmethod
@@ -49,4 +49,8 @@ class DBConnection(object):
 
 	@abc.abstractmethod
 	def disable_commit(self):
+		pass
+	
+	@abc.abstractmethod
+	def commit_enabled(self):
 		pass
