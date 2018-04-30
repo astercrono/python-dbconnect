@@ -11,8 +11,6 @@ class QueryResultWriter(object):
 class VerboseQueryResultWriter(QueryResultWriter):
 	def write(self, query_result):
 		builder = []
-		# output is ignored for console printer
-
 		builder.append("======================================")
 
 		if hasattr(query_result.query, "name"):
