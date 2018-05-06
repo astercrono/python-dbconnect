@@ -1,6 +1,6 @@
 init:
 	virtualenv --no-site-packages --distribute -p python3 env
-	pip install -r requirements.txt
+	. env/bin/activate; pip install -r requirements.txt
 test:
 	. env/bin/activate; py.test tests
 clean:
