@@ -1,2 +1,6 @@
 .DS_Store
 *.pyc
+env
+**/*.pyc
+.vscode
+.pytest_cache
