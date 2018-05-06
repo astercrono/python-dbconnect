@@ -61,8 +61,6 @@ def test_update():
 		assert result.duration is not None
 
 		check_value(connection, 4, 33)
-		connection.rollback()
-		check_value(connection, 4, 9)
 	finally:
 		connection.close()
 
