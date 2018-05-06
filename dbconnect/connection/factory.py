@@ -16,7 +16,6 @@ CONNECTION_MAPPER = {
 
 def create_connection(connection_id, connection_string):
 	connection = CONNECTION_MAPPER.get(connection_id)()
-	print(connection)
 	if connection is not None:
 		return connection().connect(connection_string)
 	return connection
