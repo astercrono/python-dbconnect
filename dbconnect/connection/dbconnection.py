@@ -45,7 +45,7 @@ class DBConnection(AbstractDBConnection):
 		try:
 			query_result.start_timer()
 			cursor.execute(query.sql, query.params)
-			query_result.end_timer()
+			query_result.end_timer(True)
 
 			query_result.rowcount = cursor.rowcount
 
@@ -65,7 +65,7 @@ class DBConnection(AbstractDBConnection):
 		try:
 			query_result.start_timer()
 			cursor.execute(query.sql, query.params)
-			query_result.end_timer()
+			query_result.end_timer(True)
 
 			query_result.rows = cursor.fetchall()
 			query_result.rowcount = len(query_result.rows)
